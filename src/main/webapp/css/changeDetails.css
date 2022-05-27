@@ -1,0 +1,68 @@
+.input-style {
+	width: 40%;
+	padding: 12px 20px;
+	margin-left: 10%;
+	box-sizing: border-box;
+	border: none;
+	background-color: white;
+	color: black;
+	font-size: 16px;
+}
+input.input-style::placeholder {
+    color: black;
+    -webkit-text-stroke-color: white;
+    font-weight: inherit;
+    -webkit-text-stroke-width: 0;
+}
+.cssForForm{
+	width:70%;
+	margin:0 0 auto;
+}
+input[type=text]:focus, textarea:focus, button:focus {
+	outline: 4px solid orange;
+	background-color: rgb(224, 255, 219); /* oranges! yey */
+}
+
+.button {
+	background-color: white; /* Green */
+	border: none;
+	color: black;
+	padding: 12px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	margin-left: 42%;
+	font-size: 16px;
+}
+
+.button:hover {
+	background-color: #555555;
+	color: white;
+}
+
+hr {
+	width: 40%
+}
+
+h3 {
+	text-align: right;
+    color: darkblue;
+    font-size: 22px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.alert {
+	color: yellow;
+	text-align: center;
+	-webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: darkgoldenrod;
+}
+
+.profile-style {
+	border-style: dotted;
+}

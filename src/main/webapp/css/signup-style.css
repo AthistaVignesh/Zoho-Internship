@@ -1,0 +1,161 @@
+*{
+	
+}
+a {
+    text-decoration: none;
+    -webkit-text-stroke-width: thin;
+    font-size: 24px;
+    color: mediumblue;
+}
+body {
+	
+	/*background-color: #0080FF;
+	background-image:url('../image/oshop.jpg');*/
+	font: 1em Helvetica;
+	background-image:url('../image/oshop.jpg');
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+
+.errorMessage {
+	background-color: white;
+	font-size: 1em;
+	box-shadow: 0px 0px 0px rgb(0 0 0/ 0%);
+	color: red;
+	font-weight: 100;
+}
+
+#container {
+	width: 840px;
+	margin: 25px auto;
+	margin-top: 50px;
+}
+
+.whysign {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	float: left;
+	background-color: white;
+	width: 437px;
+	height: 606px;
+	border-radius: 0 15px 15px 0;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.whysignLogin {
+	float: left;
+	background-color: white;
+	text-align: center;
+	width: 480px;
+	height: 452px;
+	border-radius: 0 5px 5px 0;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.whyforgotPassword {
+	float: left;
+	background-color: white;
+	text-align: center;
+	width: 480px;
+	height: 470px;
+	border-radius: 0 5px 5px 0;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.loginCss {
+	float: left;
+	width: 300px;
+	height: 412px;
+	border-radius: 15px 0px 0px 15px;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+}
+
+.signup {
+	float: left;
+	width: 343px;
+	height: 566px;
+	border-radius: 15px 0px 0px 15px;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+}
+
+.forgetCss, .resetCss {
+	float: left;
+	width: 300px;
+	height: 430px;
+	border-radius: 15px 0px 0px 15px;
+	padding: 30px 20px;
+	background-color: white;
+	text-align: center;
+}
+
+[type=text], [type=email], [type=number], [type=password], select,
+	option, .cssStyle {
+	display: block;
+	margin: 0 auto;
+	width: 116%;
+	border: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+	height: 44px;
+	line-height: 58px;
+	margin-left: 11px;
+	margin-right: -34px;
+	margin-bottom: 10px;
+	font-size: 1em;
+	color: black;
+}
+
+[type=submit] {
+	margin-top: 12px;
+	width: 47%;
+	border: 0;
+	background-color: #0080FF;
+	border-radius: 5px;
+	height: 50px;
+	color: white;
+	font-weight: 400;
+	font-size: 1em;
+}
+
+[type='text']:focus {
+	outline: none;
+	border-color: #53CACE;
+}
+
+h1 {
+	color: red;
+	font-weight: 900;
+	font-size: 20px;
+}
+
+p {
+	color: rgba(0, 0, 0, .6);
+	font-size: 1.2em;
+	margin: 50px 0 50px 0;
+}
+
+span {
+	font-size: .75em;
+	background-color: white;
+	padding: 2px 5px;
+	color: rgba(0, 0, 0, .6);
+	border-radius: 2px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+	margin: 5px;
+}
+
+span:hover {
+	color: #53CACE;
+}
+
+p:nth-of-type(2) {
+	font-size: 1em;
+}

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd"> 
+<struts>
+<constant name="struts.devMode" value="true" />
+<package name="signUp" extends="struts-default">
+	<action name="signupAct" class="callAction.signupAction">
+ 		<result name="success" type="redirect">
+			<param name="location">/signup.jsp?msg=${"valid"}</param>
+		</result>
+ 		<result name="failure" type="redirect">
+			<param name="location">/signup.jsp?msg=${"invalid"}</param>
+ 		</result>
+ 		<result name="incorrect">signup.jsp?msg=${"incorrect"}</result>
+ 		<result name="input">signup.jsp</result>
+	</action>
+</package>
+
+<package name="login" extends="struts-default">
+	<action name="loginAct" class="callAction.loginAction">
+		<result name="consumer">welcome.jsp</result>
+		<result name="supplier" type="redirect">
+			<param name = "location">supplier/supplierHeader.jsp</param> 
+		</result>  
+ 		<result name="invalid" type="redirect">
+            <param name="location">/login.jsp?msg=${"invalid"}</param>
+ 		</result>
+		<result name="error" type="redirect">
+            <param name="location">/login.jsp?msg=${"error"}</param>
+ 		</result>
+ 		<result name="notfound" type="redirect">
+            <param name="location">/login.jsp?msg=${"notfound"}</param>
+		</result>
+	</action>
+	<action name="logOutAct" class="callAction.loginAction" method="logOut">
+	<result name="success" type="redirect">/login.jsp</result>
+	</action>
+</package>
+
+
+<package name="home" extends="struts-default">
+	<action name="homeAct" class="callAction.homeAction">
+		<result name="success">home.jsp</result>
+		<result name="failure" type="redirect">
+			<param name = "location">login.jsp</param> 
+		</result>  
+	</action>
+	
+	<action name="addToCartAct" class="callAction.addToCartAction">
+		
+		<result name="exist" type="redirect">
+                	<param name="location">/home.jsp?msg=${"exist"}</param>
+		</result>
+		<result name="added" type="redirect">
+                	<param name="location">/home.jsp?msg=${"added"}</param>
+		</result>
+		<result name="failed" type="redirect">
+                	<param name="location">/home.jsp?msg=${"failed"}</param>
+		</result>
+	</action>
+	
+	<action name="searchAct" class="callAction.searchAction">
+		<result name="success">home.jsp</result>
+	</action>
+	
+	<action name="myCartAct" class="callAction.myCartAction">
+		<result name="success">myCart.jsp</result>
+		<result name="successToOrderDefault" type="redirectAction">
+		<param name="actionName">addressPaymentForOrderAct</param>
+		<param name="fetchWhat">1</param>
+		</result>
+		<result name="successToOrderAlt" type="redirectAction">
+		<param name="actionName">addressPaymentForOrderAct</param>
+		<param name="fetchWhat">2</param>
+		</result>
+	</action>
+	
+	<action name="addOneMoreAct" class="callAction.addToCartAction">
+		<result name="added">welcome.jsp</result>
+		<result name="exist" type="redirectAction"><param name="actionName">myCartAct</param></result>
+		<result name="failed">welcome.jsp</result>
+	</action>
+	
+	<action name="subOneMoreAct" class="callAction.addToCartAction" method="decreaseQuantity">
+		<result name="success" type="redirectAction"><param name="actionName">myCartAct</param></result>
+		<result name="invalid" type="redirectAction"><param name="actionName">myCartAct</param></result>
+		<result name="failure">welcome.jsp</result>
+	</action>
+	
+	<action name="removeFromCartAct" class="callAction.addToCartAction" method="removeProduct">
+		<result name="success" type="redirectAction"><param name="actionName">myCartAct</param></result>
+		<result name="failure">welcome.jsp</result>
+	</action>
+	
+	<action name="addressPaymentForOrderAct" class="callAction.addressPaymentForOrderAction">
+		<result name="successFromUsers">addressPaymentForOrder.jsp?upd=${"all"}</result>
+		<result name="successFromCart">addressPaymentForOrder.jsp?upd=${"cart"}</result>
+	</action>
+	
+	<action name="addressChangeAct" class="callAction.addressPaymentForOrderAction" method="updateAddress">
+		<result name="success" type="redirectAction">
+		<param name="actionName">billAct</param>
+		<param name="returnValue">1</param>
+		</result>
+		
+	</action>
+	<action name="billAct" class="callAction.billAction">
+		<result name="success">
+		<param name="location">bill.jsp</param>
+		<param name="returnValue">1</param>
+		</result>
+		<result name="failure">addressPaymentForOrder.jsp</result>
+	</action>
+	<action name="myOrderAct" class="callAction.myOrderAction">
+		<result name="success">
+		<param name="location">myOrders.jsp</param>
+		</result>
+	</action>
+	<action name="messageUsAct" class="callAction.messageUsAction">
+		<result name="success">
+		<param name="location">messageUs.jsp</param>
+		</result>
+	</action>
+	<action name="messageFeedbackAct" class="callAction.messageUsAction" method="fetchMessage">
+		<result name="success">
+		<param name="location">messageUs.jsp?msg=${"1"}</param>
+		</result>
+		<result name="failure">
+		<param name="location">messageUs.jsp?msg=${"0"}</param>
+		</result>
+	</action>
+</package>
+
+<package name="changeDetails" extends="struts-default">
+	<action name="changeDetailsAct" class="callAction.changeDetailsAction">
+ 		<result>changeDetails.jsp</result>
+	</action>
+	<action name="changePasswordAct" class="callAction.changeDetailsAction" method="changePassword">
+ 		<result name="success">
+ 		<param name="location">changePassword.jsp?returnValue=${"1"}</param>
+ 		</result>
+ 		<result name="wrong">
+ 		<param name="location">changePassword.jsp?returnValue=${"2"}</param>
+ 		</result>
+ 		<result name="failed">error.jsp</result>
+ 		<result name="rule">
+ 		<param name="location">changePassword.jsp?returnValue=${"3"}</param>
+ 		</result>
+ 		<result name="check">
+ 		<param name="location">changePassword.jsp?returnValue=${"4"}</param>
+ 		</result>
+	</action>
+	<action name="addChangeAddressAct" class="callAction.addChangeAddressAction">
+		<result name="success">addChangeAddress.jsp</result>
+		<result name="successChanged">addChangeAddress.jsp?msg=${"1"}</result>
+		<result name="failedChange">addChangeAddress.jsp?msg=${"0"}</result>
+	</action>
+	
+	<action name="changeAddressAct" class="callAction.addChangeAddressAction" method="changeAddress">
+		<result name="success" type="redirectAction">
+		<param name="actionName">addChangeAddressAct</param>
+		<param name="statusShow">1</param>
+		</result>
+		<result name="failure" type="redirectAction">
+		<param name="actionName">addChangeAddressAct</param>
+		<param name="statusShow">0</param>
+		</result>
+	</action>
+	
+	<action name="changeMobileNumberAct" class="callAction.changeMobileNumberAction">
+		<result name="success">changeMobileNumber.jsp?msg=${"1"}</result>
+		<result name="failure">changeMobileNumber.jsp?msg=${"failure"}</result>
+		<result name="invalid">changeMobileNumber.jsp?msg=${"0"}</result>
+	</action>
+	
+</package>
+
+<package name="forgotPass" extends="struts-default">
+	<action name="forgotPassAct1" class="callAction.forgotPasswordAction">
+ 		<result name="success" type="redirect">
+                			<param name="location">/forgotPassword.jsp?msg=${"True"}</param>
+		</result>
+ 		<result name="failure" type="redirect">
+                			<param name="location">/forgotPassword.jsp?msg=${"False"}</param>
+ 		</result>
+	</action>
+
+	<action name="forgotPassAct2" class="callAction.forgotPasswordAction">
+		<result name="resetPass">resetPassword.jsp</result>
+ 		<result name="incorrect" type="redirect">
+                			<param name="location">/forgotPassword.jsp?msg=${"incorrect"}</param>
+ 		</result>
+		 <result name="failure" type="redirect">
+               			 <param name="location">/forgotPassword.jsp?msg=${"False"}</param>
+ 		</result>
+	</action>
+
+ 	<action name="index" >
+		<result name="success">index.jsp</result>
+	</action>
+ 
+	<action name="resetPasswordAct" class="callAction.resetPasswordAction">
+		<result name="success">login.jsp?msg=${"changed"}</result>
+		<result name="input">resetPassword.jsp</result>
+	</action>
+</package>
+
+<package name="product" namespace="/supplier" extends="struts-default">
+
+	<action name="addNewProdActID" class="callAction.addNewProductAction">	
+		<result name="success" type="redirect">addNewProduct.jsp</result>
+	</action>
+
+	<action name="addNewProdAct" class="callAction.addNewProductAction" method="addToDB">
+		<result name="success" type="redirect">
+ 			<param name="location">addNewProduct.jsp?prodmsg=${"valid"}</param>
+ 		</result>
+ 		<result name="failure" type="redirect">
+ 			<param name="location">addNewProduct.jsp?prodmsg=${"invalid"}</param>
+ 		</result>
+	</action>
+
+	<action name="allProdEditProdAct" class="callAction.allProductEditProductAction">
+		<result name="success" type="redirect">allProductEditProduct.jsp</result>
+		<result name="successEditing" type="redirect">
+		<param name="location">allProductEditProduct.jsp?msg=${"refresh"}</param>
+		</result>
+	</action>
+	
+	<action name="deleteProductAct" class="callAction.editProductAction" method="deleteProduct">
+		<result name="success" type="redirectAction">
+		<param name="actionName">allProdEditProdAct</param>	
+		</result>
+	</action>
+	
+	<action name="editProdAct" class="callAction.editProductAction">
+		<result name="success" type="redirect">editProduct.jsp</result>
+	</action>
+	
+	<action name="editProdChangeAct" class="callAction.editProductAction" method='changeProdDetails'>
+		<result name="success" type="redirectAction">
+		<param name="actionName">allProdEditProdAct</param>
+		<param name="returnValue">1</param>
+		</result>
+	</action>
+	
+	<action name="feedbackReceivedAct" class="callAction.feedbackReceivedAction">
+		<result name="success" type="redirect">feedbackReceived.jsp</result>
+		<result name="failure" type="redirect">addNewProduct.jsp</result>
+	</action>
+	
+	<action name="ordersReceivedAct" class="callAction.ordersReceivedAction">
+		<result name="success" type="redirect">ordersReceived.jsp?msg=${resValue}</result>
+		<result name="successToDelivered" type="redirect">deliveredOrders.jsp</result>
+		<result name="successToCancel" type="redirect">cancelOrders.jsp</result>
+		<result name="failure" type="redirect">ordersReceived.jsp</result>
+	</action>
+	
+	<action name="removeProdFromOrderAct" class="callAction.ordersReceivedAction" method="removeFromOrder">
+		<result name="success" type="redirectAction">
+		<param name="actionName">ordersReceivedAct</param>
+		<param name="showStatus">Processing</param>
+		<param name="resValue">-1</param>
+		</result>
+		<result name="sucessToConsumer" type="redirectAction">
+		<param name="actionName">../myOrderAct</param>
+		</result>
+	</action>
+	
+	<action name="deliveredProdFromOrderAct" class="callAction.ordersReceivedAction" method="deliveredOrder">
+		<result name="success" type="redirectAction">
+		<param name="actionName">ordersReceivedAct</param>
+		<param name="showStatus">Processing</param>
+		<param name="resValue">0</param>
+		</result>
+	</action>
+	
+	<action name="filterByCategoryAct" class="callAction.filterByCategoryAction">
+	<result name="successToCancel">cancelOrders.jsp</result>
+	<result name="successToDelivered">deliveredOrders.jsp</result>
+	<result name="success">ordersReceived.jsp</result>
+	<result name="failure">error.jsp</result>
+	</action>
+	
+</package>
+
+</struts>
