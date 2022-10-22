@@ -1,0 +1,77 @@
+.input-style {
+	width: 60%;
+	padding: 12px 20px;
+	
+	box-sizing: border-box;
+	border: none;
+	background-color: white;
+	color: black;
+	font-size: 16px;
+}
+
+select#aboutWhat {
+    font-size: 20px;
+    color: white;
+    background: #047BD5;
+    font-weight: bold;
+}
+
+form {
+    text-align: center;
+}
+
+.alert {
+    color: yellow;
+    text-align: center;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: darkgoldenrod;
+    font-size:20px;
+}
+
+span#selectText {	
+    color: black;
+    font-size: 20px;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+}
+
+input[type=text]:focus, textarea:focus, button:focus {
+	outline: 4px solid orange;
+	background-color: rgb(224, 255, 219); /* oranges! yey */
+}
+
+textarea {
+	height: 250px;
+	font-size: 16px;
+}
+
+.button {
+	background-color: #047BD5;
+	border: none;
+	color:white;
+	padding: 12px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	
+	font-size: 16px;
+}
+
+.button:hover {
+	background-color: #555555;
+	color: white;
+}
+
+hr {
+	width: 60%
+}
+
+h3 {
+	text-align: center;
+	color: white;
+}
