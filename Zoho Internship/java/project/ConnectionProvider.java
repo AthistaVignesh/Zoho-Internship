@@ -1,13 +1,16 @@
 package project;
 import java.sql.*;
+import java.io.*;
+import java.net.*;
+import com.ibatis.common.jdbc.ScriptRunner;
 public class ConnectionProvider {
+	public static final String mysqlUser=""; //Enter Your Mysql User Here
+	public static final String mysqlPassword=""; //Enter Your Mysql Password Here
+	public static final String dbName="";
 	public static Connection getcon() {
 		try {	
-			//Remember to create the database onlineapp
-			String mysqlUser=""; //Enter Your Mysql User Here
-			String mysqlPassword=""; //Enter Your Mysql Password Here
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineapp",mysqlUser,mysqlPassword);
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbName,mysqlUser,mysqlPassword);
 			return con;
 		}
 	
@@ -16,4 +19,28 @@ public class ConnectionProvider {
 			return null;
 		}
 }
+	public static void populateDB(){
+		try{
+			System.out.println("Starting to Populate the schema");
+			String catalinaBase = System.getProperty("catalina.base");
+			String scriptLocation = catalinaBase+"/webapps/ROOT/table/schema.sql";
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306",mysqlUser,mysqlPassword);
+			Statement st=con.createStatement();  
+			boolean result=st.execute("create database "+dbName); 
+			con.setCatalog(dbName);
+			Statement stmt = null;
+			ScriptRunner sr = new ScriptRunner(con, false, false);
+			// Give the input file to Reader
+			Reader reader = new BufferedReader(new FileReader(scriptLocation));
+			// Exctute script
+			sr.runScript(reader);
+			System.out.println("Done Populating the schema");
+		
+		}
+		catch(Exception e){
+			System.out.println("Failed to Execute The error is " + e.getMessage());
+		}
+	}
+
 }
