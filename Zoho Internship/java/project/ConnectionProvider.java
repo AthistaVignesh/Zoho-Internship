@@ -3,6 +3,8 @@ import java.sql.*;
 import java.io.*;
 import java.net.*;
 import com.ibatis.common.jdbc.ScriptRunner;
+import org.apache.struts2.ServletActionContext;
+import javax.servlet.http.HttpServletRequest;
 public class ConnectionProvider {
 	public static final String mysqlUser=""; //Enter Your Mysql User Here
 	public static final String mysqlPassword=""; //Enter Your Mysql Password Here
@@ -22,8 +24,11 @@ public class ConnectionProvider {
 	public static void populateDB(){
 		try{
 			System.out.println("Starting to Populate the schema");
+			HttpServletRequest request = ServletActionContext.getRequest(); 
+    			String url = request.getRequestURI();
+			String appName=(url.equals("/"))?"/ROOT/":url;
 			String catalinaBase = System.getProperty("catalina.base");
-			String scriptLocation = catalinaBase+"/webapps/ROOT/table/schema.sql";
+			String scriptLocation = catalinaBase+"/webapps"+appName+"table/schema.sql";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306",mysqlUser,mysqlPassword);
 			Statement st=con.createStatement();  
